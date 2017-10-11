@@ -1,5 +1,7 @@
 import { Componen, OnInit } from '@angular/core';
 import { dia, shapes } from 'jointjs';
+import * as $ from 'jquery';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-root',
