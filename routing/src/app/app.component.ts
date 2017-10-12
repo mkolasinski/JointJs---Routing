@@ -1,13 +1,13 @@
-import { Componen, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { dia, shapes } from 'jointjs';
 import * as $ from 'jquery';
-import * as _ from 'lodash';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit{
 
   ngOnInit() {
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit{
     let source = new shapes.basic.Rect({
       position: { x: 50, y: 50 },
       size: { width: 140, height: 70 },
-      attrs: {
+      attr: {
         rect: {
           fill: {
             type: 'linearGradient',
@@ -48,7 +48,8 @@ export class AppComponent implements OnInit{
       }
     });
 
-    let target = source.clone().translate(750, 400).attr('text/text', 'Target');
+    let target = source.clone();
+    (target as any).translate(750, 400).attr('text/text', 'Target');
 
     let link = new dia.Link({
       source: { id: source.id },
@@ -67,7 +68,8 @@ export class AppComponent implements OnInit{
       }
     });
 
-    let obstacle = source.clone().translate(300, 100).attr({
+    let obstacle = source.clone();
+    (obstacle as any).translate(300, 100).attr({
       text: {
         text: 'Obstacle',
         fill: '#eee'
@@ -83,8 +85,6 @@ export class AppComponent implements OnInit{
 
     let obstacles = [
       obstacle,
-      obstacle.clone().translate(200, 100),
-      obstacle.clone().translate(-200, 150)
     ];
 
     graph.addCells(obstacles).addCells([source, target, link]);
@@ -94,8 +94,8 @@ export class AppComponent implements OnInit{
     graph.on('change:position', function(cell) {
 
       // has an obstacle been moved? Then reroute the link.
-      if (_.contains(obstacles, cell)) paper.findViewByModel(link).update();
-    });
+    //   if (_.contains(obstacles, cell)) paper.findViewByModel(link).update();
+    // });
 
     $('.router-switch').on('click', function(evt) {
 
@@ -110,5 +110,5 @@ export class AppComponent implements OnInit{
 
       link.set('connector', { name: connector });
     });
-  }
-}
+  })
+}}
