@@ -29,12 +29,15 @@ export class AppComponent implements OnInit {
       {
         rect: {
           fill: '#f2c9d6',
-          stroke: '#ff93b5'
+          stroke: '#ff93b5',
+          rx: 15,
+          ry: 15
         },
         text: {
           text: 'Source',
           'font-size': 14,
-          'font-weight': 'bolder'
+          'font-weight': 'bolder',
+          'font-family': 'sans-serif'
         }
       }
     });
@@ -46,12 +49,15 @@ export class AppComponent implements OnInit {
       {
         rect: {
           fill: '#ff93b5',
-          stroke: '#f2c9d6'
+          stroke: '#f2c9d6',
+          rx: 15,
+          ry: 15
         },
         text: {
           text: 'Target',
           'font-size': 14,
-          'font-weight': 'bolder'
+          'font-weight': 'bolder',
+          'font-family': 'sans-serif'
         }
       }
     });
@@ -61,9 +67,7 @@ export class AppComponent implements OnInit {
     let link = new dia.Link({
       source: { id: source.id },
       target: { id: target.id },
-      // router: { name: 'manhattan' },
-      // connector: { name: 'rounded' },
-      attr: {
+      attrs: {
         '.connection': {
           stroke: '#333333',
           'stroke-width': 1
@@ -75,8 +79,9 @@ export class AppComponent implements OnInit {
         '.marker-source': {
           fill: '#333333',
           d: 'M 10 0 L 5 L 10 10 z'
-        }
-      }
+        },
+      },
+      smooth: true
     });
 
     let obstacle = source.clone();
