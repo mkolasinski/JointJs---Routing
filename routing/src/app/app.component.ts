@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { dia, shapes } from 'jointjs';
 import * as $ from 'jquery';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import * as $ from 'jquery';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
   ngOnInit() {
 
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit{
       el: $('#paper'),
       width: 1000,
       height: 600,
-      gridSize: 10,
+      gridSize: 1,
       model: graph
     });
 
@@ -94,7 +95,7 @@ export class AppComponent implements OnInit{
     graph.on('change:position', function(cell) {
 
       // has an obstacle been moved? Then reroute the link.
-    //   if (_.contains(obstacles, cell)) paper.findViewByModel(link).update();
+      // if (_.contains(obstacles, cell)) paper.findViewByModel(link).update();
     // });
 
     $('.router-switch').on('click', function(evt) {
@@ -110,5 +111,5 @@ export class AppComponent implements OnInit{
 
       link.set('connector', { name: connector });
     });
-  })
+  });
 }}
