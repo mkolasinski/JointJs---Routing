@@ -13,8 +13,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    let graph = new dia.Graph();
-    let paper = new dia.Paper({
+    const graph = new dia.Graph();
+    const paper = new dia.Paper({
       el: $('#paper'),
       width: 1000,
       height: 600,
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     });
 
 
-    let source = new shapes.basic.Rect({
+    const source = new shapes.basic.Rect({
       position: { x: 50, y: 50 },
       size: { width: 140, height: 70 },
       attr: {
@@ -49,10 +49,10 @@ export class AppComponent implements OnInit {
       }
     });
 
-    let target = source.clone();
+    const target = source.clone();
     (target as any).translate(750, 400).attr('text/text', 'Target');
 
-    let link = new dia.Link({
+    const link = new dia.Link({
       source: { id: source.id },
       target: { id: target.id },
       router: { name: 'manhattan' },
@@ -69,7 +69,7 @@ export class AppComponent implements OnInit {
       }
     });
 
-    let obstacle = source.clone();
+    const obstacle = source.clone();
     (obstacle as any).translate(300, 100).attr({
       text: {
         text: 'Obstacle',
@@ -84,14 +84,17 @@ export class AppComponent implements OnInit {
       }
     });
 
-    let obstacles = [
+    const obstacles = [
       obstacle,
+      obstacle.clone(),
+      (obstacle as any).translate( 200, 100 ),
+      obstacle.clone(),
+      (obstacle as any).translate( -200, 150 )
     ];
 
     graph.addCells(obstacles).addCells([source, target, link]);
 
     link.toBack();
-
     graph.on('change:position', function(cell) {
 
       // has an obstacle been moved? Then reroute the link.
@@ -100,8 +103,8 @@ export class AppComponent implements OnInit {
 
     $('.router-switch').on('click', function(evt) {
 
-      let router = $(evt.target).data('router');
-      let connector = $(evt.target).data('connector');
+      const router = $(evt.target).data('router');
+      const connector = $(evt.target).data('connector');
 
       if (router) {
         link.set('router', { name: router });
